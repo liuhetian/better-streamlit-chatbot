@@ -2,8 +2,8 @@ import openai
 import streamlit as st
 import tiktoken
 
-openai.api_key = ''
-# openai.api_base = "https://api.chatanywhere.cn/v1"  # 使用从chatanywhere购买的便宜key
+openai.api_key = st.secret['chatanywhere']['api_key']
+openai.api_base = "https://api.chatanywhere.cn/v1"  # 使用从chatanywhere购买的便宜key
 
 
 st.set_page_config(page_title='天同学的GPT', page_icon=None, layout="centered", initial_sidebar_state="auto", menu_items=None)
