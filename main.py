@@ -90,9 +90,10 @@ if prompt := st.chat_input():
 with st.sidebar:
     with st.expander('清除聊天记录'):
         def remake():
-            del st.session_state['messages'][2:] 
+            del st.session_state['messages'][1:] 
         def remake_one():
-            del st.session_state['messages'][-1]
+            if len(st.session_state['messages']) > 1:
+                del st.session_state['messages'][-1]
         col1, col2 = st.columns(2)
         with col1:
             st.button("删除全部", on_click=remake)
@@ -107,13 +108,6 @@ with st.sidebar:
         col3.metric('total', st.session_state["use_num_all1"] + st.session_state["use_num_all2"], delta=use_num1+use_num2)
         m = st.session_state['money']
         st.metric('共计花费（人民币）', f'{m:.2f} 元', delta=f'{money:.4f}')
-
-    
-    with st.expander('变更日志'):
-        st.markdown('''
-#### V1.1
-1. 修改前端
-        ''')
 
 
 if always_show and use_num1:
