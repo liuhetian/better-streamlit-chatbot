@@ -8,9 +8,7 @@ openai.api_base = "https://api.chatanywhere.cn/v1"  # 使用从chatanywhere购�
 
 st.set_page_config(page_title='天同学的GPT', page_icon=None, layout="centered", initial_sidebar_state="auto", menu_items=None)
 
-
 if "messages" not in st.session_state:
-
     st.session_state["messages"] = [{'role': 'system', 'content': ''}]
     st.session_state["use_num_all1"] = st.session_state["use_num_all2"] = st.session_state['money'] = 0
     
@@ -46,7 +44,7 @@ with st.expander('系统提示词'):
 #------------------------------
 
 for msg in st.session_state.messages[1:]:
-    st.chat_message(msg["role"], avatar=msg.get('avatar')).write(msg["content"])
+    st.chat_message(msg["role"].replace('\n', '\n\n'), avatar=msg.get('avatar')).write(msg["content"])
 
 use_num1 = use_num2 = money = 0
 
@@ -101,7 +99,7 @@ with st.sidebar:
             st.button("删除一条", on_click=remake_one)
     
     with st.expander('token和费用'):
-        always_show = st.checkbox('问答下方即时显示花费', value=True)
+        always_show = st.checkbox('问答下方即时显示花费', )  # value=True
         col1, col2, col3 = st.columns(3)
         col1.metric('prompt', st.session_state["use_num_all1"], delta=use_num1)
         col2.metric('completion', st.session_state["use_num_all2"], delta=use_num2)
