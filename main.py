@@ -44,7 +44,7 @@ with st.expander('系统提示词'):
 #------------------------------
 
 for msg in st.session_state.messages[1:]:
-    st.chat_message(msg["role"].replace('\n', '\n\n'), avatar=msg.get('avatar')).write(msg["content"])
+    st.chat_message(msg["role"].replace('\n', '<br>'), avatar=msg.get('avatar')).write(msg["content"])
 
 use_num1 = use_num2 = money = 0
 
