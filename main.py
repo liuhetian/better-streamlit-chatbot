@@ -52,7 +52,7 @@ use_num1 = use_num2 = money = 0
 #------------------------------处理提交逻辑
 if prompt := st.chat_input():
     st.session_state['messages'].append({"role": "user", "content": prompt})
-    st.chat_message("user").write(prompt)
+    st.chat_message("user").write(prompt.replace('\n', '\n\n'))
     use_num1 = num_tokens_from_messages(st.session_state['messages'], model)
     st.session_state["use_num_all1"] += use_num1
     with st.chat_message('assistant'):
@@ -66,7 +66,7 @@ if prompt := st.chat_input():
             )
             for r in rep:
                 msg += r['choices'][0]['delta'].get('content', '')
-                st.write(msg)
+                st.write(msg.replace('\n', '\n\n'))
     use_num2 = len(tiktoken.encoding_for_model(model).encode(msg))
     st.session_state["use_num_all2"] += use_num2
     st.session_state['messages'].append({"role": "assistant", "content": msg})
